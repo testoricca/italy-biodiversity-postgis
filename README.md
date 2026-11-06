@@ -56,3 +56,32 @@ Some occurrence coordinates do not intersect the administrative polygons. These 
 Occurrence data: GBIF.
 
 Administrative boundaries: geoBoundaries. Consult the source dataset's attribution and license terms when redistributing or using the boundaries.
+
+## Extended analysis: 10,000 GBIF records
+
+To evaluate how sample size affects regional biodiversity summaries, the original workflow was extended using paginated requests to the GBIF Occurrence API.
+
+### Data processing
+
+- **10,000** occurrence records downloaded.
+- **9,959** records retained after excluding missing species identifiers.
+- **1,503** distinct species identifiers.
+- **9,959** valid point geometries in EPSG:4326.
+- **9,760** observations intersecting at least one Italian regional polygon.
+- **20 of 20** regions represented in the spatial analysis.
+
+The extended dataset was loaded into a separate PostgreSQL/PostGIS table (`gbif_observations_10k`) to preserve the original 299-record analysis.
+
+### Regional results
+
+The highest observed species counts were recorded in Lombardia (546), Piemonte (322), Toscana (315), Veneto (312), and Lazio (304).
+
+Across the 20 regions, the Pearson correlation between the number of observations and the number of distinct species was **r = 0.937**.
+
+This strong positive association suggests that sampling intensity is an important consideration when interpreting regional species counts. It does not establish causality or demonstrate that regions with more recorded species have greater underlying biodiversity.
+
+### Limitations
+
+GBIF occurrence records are not a standardized, equal-effort biodiversity survey. Regional differences may reflect sampling effort, reporting practices, habitat diversity, geographic coverage, and other factors.
+
+The maps represent **observed species richness within the downloaded samples**, not estimates of total regional biodiversity.
